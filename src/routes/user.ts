@@ -3,7 +3,7 @@ import {
   checkReachable,
   postSignup,
   postSignin,
-} from "../controllers/student";
+} from "../controllers/user";
 import { isUserAuthenticated } from "../middlewares/isRoleAuthenticated";
 
 const router: Router = express.Router();

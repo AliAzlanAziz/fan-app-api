@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import {
   Signin,
   Signup,
-} from "../services/student";
+} from "../services/user";
 
 export const checkReachable = (
   req: Request,
