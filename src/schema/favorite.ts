@@ -1,21 +1,22 @@
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+import { model, Schema, Types } from "mongoose";
 
 const favoriteSchema = new Schema({
-    id: { type: Number, autoIncrement: true, primaryKey: true },
-    user: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
-        required: true
-    },
-    artist: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
-        required: true
-    },
-    created_at: { type: Date, default: Date.now },
+  _id: {
+    type: Types.ObjectId,
+  },
+  user: {
+    type: Types.ObjectId,
+    ref: "User",
+    required: true,
+  },
+  artist: {
+    type: Types.ObjectId,
+    ref: "User",
+    required: true,
+  },
+  created_at: { type: Date, default: Date.now },
 });
 
-const Favorite = mongoose.model('Favorite', favoriteSchema);
+const Favorite = model("Favorite", favoriteSchema);
 
-module.exports = Favorite;
+export default Favorite;

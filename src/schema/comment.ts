@@ -1,25 +1,26 @@
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+import { model, Schema, Types } from "mongoose";
 
 const commentSchema = new Schema({
-    id: { type: Number, autoIncrement: true, primaryKey: true },
-    user: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
-        required: true
-    },
-    poster: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Poster',
-        required: true
-    },
-    comment: {
-        type: String,
-        required: true
-    },
-    created_at: { type: Date, default: Date.now }
+  _id: {
+    type: Types.ObjectId,
+  },
+  user: {
+    type: Types.ObjectId,
+    ref: "User",
+    required: true,
+  },
+  poster: {
+    type: Types.ObjectId,
+    ref: "Poster",
+    required: true,
+  },
+  comment: {
+    type: String,
+    required: true,
+  },
+  created_at: { type: Date, default: Date.now },
 });
 
-const Comment = mongoose.model('Comment', commentSchema);
+const Comment = model("Comment", commentSchema);
 
-module.exports = Comment;
+export default Comment;

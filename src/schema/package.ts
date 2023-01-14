@@ -1,14 +1,15 @@
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+import { model, Schema, Types } from "mongoose";
 
 const packageSchema = new Schema({
-    id: { type: Number, autoIncrement: true, primaryKey: true },
+    _id: {
+        type: Types.ObjectId,
+    },
     name: { type: String, required: true },
     hearts: { type: Number, required: true },
     price: { type: Number, required: true },
     created_at: { type: Date, default: Date.now },
 });
 
-const Package = mongoose.model('Package', packageSchema);
+const Package = model('Package', packageSchema);
 
-module.exports = Package;
+export default Package;
