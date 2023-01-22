@@ -17,7 +17,7 @@ export const createComment = async (comment: CommentModel, user: UserModel, res:
         await newComment.save();
 
         return res.status(200).json({
-            success: false,
+            success: true,
             message: "Successfully commented on poster!"
         });
     } catch(error) {

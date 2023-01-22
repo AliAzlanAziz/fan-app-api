@@ -30,10 +30,11 @@ export const createExchange = async (
     ]);
     const total = (totalHearts[0] as MongooseGroup)?.total || 0;
     const remaining = total - hearts.pending - hearts.approved;
-    if(remaining <= 0){
+    if(remaining < exchange.hearts){
       return res.status(400).json({
         success: false,
-        message: "Cannot create exchange request, Insufficient hearts"
+        message: 'Cannot create exchange request, Insufficient hearts',
+        remaining: remaining
       })
     }
 

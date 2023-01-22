@@ -20,7 +20,7 @@ export const createDonation = async (
       });
     } else if (donation?.status == 1) {
       return res.status(400).json({
-        success: true,
+        success: false,
         message: "Donation Failed!",
       });
     }
