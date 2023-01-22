@@ -227,16 +227,16 @@ export const userProfile = async (user: UserModel, res: Response) => {
         getUserHeartsSumGroupByStatus(user._id),
       ]);
 
+      const total = (totalHearts[0] as MongooseGroup)?.total || 0;
+
       return res.status(200).json({
         success: true,
         user: {
           ...user,
           hearts: {
-            exchange: hearts,
-            totalHearts: (totalHearts[0] as MongooseGroup)?.total || 0,
-            pending: { _id: 1 },
-            approved: { _id: 2 },
-            rejected: { _id: 3 },
+            ...hearts,
+            total: total,
+            remaining: total - hearts.pending - hearts.approved
           },
         },
       });

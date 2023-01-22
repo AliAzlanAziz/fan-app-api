@@ -4,6 +4,8 @@ import {
   ExchangeStatus,
 } from "../enum/exchangeStatus.enum";
 import { ExchangeModel } from "../models/exchange.model";
+import { HeartsModel } from "../models/hearts.model";
+import { MongooseGroup } from "../models/mongooseGroup.model";
 import { UserModel } from "../models/user.model";
 import {
   findAllExchanges,
@@ -14,6 +16,7 @@ import {
   updateExchangeStatusById,
 } from "../repo/exchange";
 import Exchange from "../schema/exchange";
+import { getArtistTotalHearts } from "./donation";
 
 export const createExchange = async (
   exchange: ExchangeModel,
@@ -21,6 +24,19 @@ export const createExchange = async (
   res: Response
 ) => {
   try {
+    const [totalHearts, hearts] = await Promise.all([
+      getArtistTotalHearts(user._id),
+      getUserHeartsSumGroupByStatus(user._id),
+    ]);
+    const total = (totalHearts[0] as MongooseGroup)?.total || 0;
+    const remaining = total - hearts.pending - hearts.approved;
+    if(remaining <= 0){
+      return res.status(400).json({
+        success: false,
+        message: "Cannot create exchange request, Insufficient hearts"
+      })
+    }
+
     const newExchange = new Exchange({
       _id: new Types.ObjectId(),
       user: user._id,
@@ -122,6 +138,24 @@ export const getUserApprovedHearts = async (user: string) => {
   return await findUserApprovedHearts(user);
 }
 
-export const getUserHeartsSumGroupByStatus = async (user: string) => {
-  return await findUserHeartsSumGroupByStatus(user);
+export const getUserHeartsSumGroupByStatus = async (user: string): Promise<HeartsModel> => {
+  try{
+    const exchangeGroupByStatus =  await findUserHeartsSumGroupByStatus(user);
+
+    const hearts: HeartsModel = new HeartsModel(0, 0, 0);
+
+    for(const item of exchangeGroupByStatus){
+      if((item as MongooseGroup)._id == '1'){
+        hearts.pending = (item as MongooseGroup).total;
+      }else if((item as MongooseGroup)._id == '2'){
+        hearts.approved = (item as MongooseGroup).total;
+      }else{
+        hearts.rejected = (item as MongooseGroup).total;
+      }
+    }
+
+    return hearts;
+  } catch(error) {
+    throw error;
+  }
 }
