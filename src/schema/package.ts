@@ -7,7 +7,7 @@ const packageSchema = new Schema({
     name: { type: String, required: true },
     hearts: { type: Number, required: true },
     price: { type: Number, required: true },
-    created_at: { type: Date, default: Date.now },
+    createdAt: { type: Date, default: Date.now },
 });
 
 const Package = model('Package', packageSchema);

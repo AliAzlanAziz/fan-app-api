@@ -14,11 +14,11 @@ const commentSchema = new Schema({
     ref: "Poster",
     required: true,
   },
-  comment: {
+  text: {
     type: String,
     required: true,
   },
-  created_at: { type: Date, default: Date.now },
+  createdAt: { type: Date, default: Date.now },
 });
 
 const Comment = model("Comment", commentSchema);

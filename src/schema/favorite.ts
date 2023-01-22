@@ -14,7 +14,7 @@ const favoriteSchema = new Schema({
     ref: "User",
     required: true,
   },
-  created_at: { type: Date, default: Date.now },
+  createdAt: { type: Date, default: Date.now },
 });
 
 const Favorite = model("Favorite", favoriteSchema);

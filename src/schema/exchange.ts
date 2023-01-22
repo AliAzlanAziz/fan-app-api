@@ -10,13 +10,13 @@ const exchangeSchema = new Schema({
     required: true,
   },
   hearts: { type: Number, required: true },
-  amount: { type: Number, required: true }, //ye post nhe hoga, backend pe calculate hoga. To dekh lena k required aega ya nhe
+  amount: { type: Number, required: true }, 
   status: {
     type: String,
     required: true,
-    enum: ["pending", "complete", "rejected"],
-  }, //default pending jaega, to dekh lena k required aega ya nhe yahan
-  created_at: { type: Date, default: Date.now },
+    enum: [1, 2, 3], //["pending", "complete", "rejected"],
+  }, 
+  createdAt: { type: Date, default: Date.now },
 });
 
 const Exchange = model("Exchange", exchangeSchema);

@@ -9,6 +9,11 @@ const donationSchema = new Schema({
     ref: "User",
     required: true,
   },
+  artist: {
+    type: Types.ObjectId,
+    ref: "User",
+    required: true,
+  },
   poster: {
     type: Types.ObjectId,
     ref: "Poster",
@@ -19,16 +24,19 @@ const donationSchema = new Schema({
     ref: "Package",
     required: true,
   },
-  hearts: { type: Number, required: true }, //ye post nhe hoga, backend pe calculate hoga. To dekh lena k required aega ya nhe
   quantity: { type: Number, required: true },
-  subtotal: { type: Number, required: true }, //ye post nhe hoga, backend pe calculate hoga. To dekh lena k required aega ya nhe
-  total: { type: Number, required: true }, //ye post nhe hoga, backend pe calculate hoga. To dekh lena k required aega ya nhe
+  totalHearts: { type: Number, required: true }, // package.hearts x quantity
+  totalPrice: { type: Number, required: true }, // package.price x quantity
+  packageCopy: {
+    hearts: { type: Number, required: true },
+    price: { type: Number, required: true },
+  },
   status: {
-    type: String,
+    type: Number,
     required: true,
-    enum: ["complete", "incomplete"],
-  }, //ye random switch kar dena kbi complete kbi incomplete
-  created_at: { type: Date, default: Date.now },
+    enum: [1, 2], // complete, incomplete
+  },
+  createdAt: { type: Date, default: Date.now },
 });
 
 const Donation = model("Donation", donationSchema);

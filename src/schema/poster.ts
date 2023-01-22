@@ -9,15 +9,39 @@ const posterSchema = new Schema({
     ref: "User",
     required: true,
   },
-  images: [{ type: String }],
-  title: { type: String, required: true },
-  date: { type: Date },
-  location: { type: String },
-  description: { type: String },
-  fan_notes: { type: String },
-  total_views: { type: Number, default: 0 },
-  total_donations: { type: Number, default: 0 },
-  created_at: { type: Date, default: Date.now },
+  title: { 
+    type: String, 
+    required: true 
+  },
+  date: { 
+    type: Date
+  },
+  location: { 
+    type: String
+  },
+  description: { 
+    type: String 
+  },
+  fanNotes: { 
+    type: String 
+  },
+  imagesUrls: [
+    {
+      type: String,
+    },
+  ],
+  totalViews: { 
+    type: Number, 
+    default: 0
+  },
+  totalDonations: { 
+    type: Number, 
+    default: 0
+  },
+  createdAt: { 
+    type: Date, 
+    default: Date.now
+  },
 });
 
 const Poster = model("Poster", posterSchema);

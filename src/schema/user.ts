@@ -10,6 +10,17 @@ const userSchema = new Schema({
     min: 1,
     max: 512,
   },
+  artist: {
+    name: {
+      type: String,
+      // unique: true, //will make sure by running logic on server and not this way as it will cause errors on two nulls being same
+      min: 1,
+      max: 512,
+    },
+    description: {
+      type: String,
+    }
+  },
   email: {
     type: String,
     required: true,
@@ -21,16 +32,23 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
-  image_url: { type: String },
-  total_views: {
+  role: {
+    type: Number,
+    required: true,
+    enum: [1, 2]
+  },
+  imageUrl: { 
+    type: String 
+  },
+  totalViews: {
     type: Number,
     default: 0,
   },
-  total_favorites: {
+  totalFavorites: {
     type: Number,
     default: 0,
   },
-  created_at: {
+  createdAt: {
     type: Date,
     default: Date.now,
   },
