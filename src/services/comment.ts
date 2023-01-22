@@ -15,10 +15,15 @@ export const createComment = async (comment: CommentModel, user: UserModel, res:
         });
 
         await newComment.save();
+
+        return res.status(200).json({
+            success: false,
+            message: "Successfully commented on poster!"
+        });
     } catch(error) {
         return res.status(500).json({
             success: false,
-            message: "Internal server error"
+            message: "Internal server error!"
         });
     }
 }

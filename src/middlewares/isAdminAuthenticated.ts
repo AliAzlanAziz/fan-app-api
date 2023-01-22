@@ -30,7 +30,7 @@ export const isAdminAuthenticated = async (
         success: false,
         message: "User does not exist!",
       });
-    } else if (result.role == UserRoles.ADMIN) {
+    } else if (result.role != UserRoles.ADMIN) {
       return res.status(404).json({
         success: false,
         message: "Invalid user role!",

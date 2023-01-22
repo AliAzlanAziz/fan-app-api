@@ -1,5 +1,5 @@
 import express, { Router } from "express";
-import { checkReachable, getAllBanks, getBankInformation, postBankStatusToApproved, postBankStatusToRejected, putBankInformation } from "../controllers/bank";
+import { checkReachable, getAllBanks, getBankInformation, putBankStatusToApproved, putBankStatusToRejected, putBankInformation } from "../controllers/bank";
 import { multerFileUploader } from "../helpers/multerFileUpload";
 import { isAdminAuthenticated } from "../middlewares/isAdminAuthenticated";
 import { isUserAuthenticated } from "../middlewares/isUserAuthenticated";
@@ -14,8 +14,8 @@ router.put("/information", isUserAuthenticated, multerFileUploader.single('doc')
 
 router.get("/admin/all", isAdminAuthenticated, getAllBanks);
 
-router.post("/admin/accept", isAdminAuthenticated, postBankStatusToApproved);
+router.put("/admin/:bankId/accept", isAdminAuthenticated, putBankStatusToApproved);
 
-router.post("/admin/reject", isAdminAuthenticated, postBankStatusToRejected);
+router.put("/admin/:bankId/reject", isAdminAuthenticated, putBankStatusToRejected);
 
 export default router;

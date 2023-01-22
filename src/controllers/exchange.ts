@@ -33,7 +33,7 @@ export const getUserAllExchanges = (
   return userAllExchanges(req.context.user, res);
 };
 
-export const postExchangeStatusToApproved = (
+export const putExchangeStatusToApproved = (
   req: Request,
   res: Response,
   next: NextFunction
@@ -41,7 +41,7 @@ export const postExchangeStatusToApproved = (
   return updateExchangeStatusToApproved(req.params.exchangeId, res);
 };
 
-export const postExchangeStatusToRejected = (
+export const putExchangeStatusToRejected = (
   req: Request,
   res: Response,
   next: NextFunction

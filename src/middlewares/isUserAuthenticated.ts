@@ -30,7 +30,7 @@ export const isUserAuthenticated = async (
         success: false,
         message: "User does not exist!",
       });
-    } else if (result.role == UserRoles.USER) {
+    } else if (payload.role != UserRoles.USER) {
       return res.status(404).json({
         success: false,
         message: "Invalid user role!",

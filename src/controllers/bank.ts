@@ -26,7 +26,7 @@ export const getAllBanks = (
   return allBanks(res);
 };
 
-export const postBankStatusToApproved = (
+export const putBankStatusToApproved = (
   req: Request,
   res: Response,
   next: NextFunction
@@ -34,7 +34,7 @@ export const postBankStatusToApproved = (
   return updateBankStatusToApproved(req.params.bankId, res);
 };
 
-export const postBankStatusToRejected = (
+export const putBankStatusToRejected = (
   req: Request,
   res: Response,
   next: NextFunction

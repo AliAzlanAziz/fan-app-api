@@ -3,6 +3,7 @@ import { Response } from "express";
 import jwt from "jsonwebtoken";
 import { Types } from "mongoose";
 import { UserRoles } from "../enum/userRole.enum";
+import { MongooseGroup } from "../models/mongooseGroup.model";
 import { UserModel } from "../models/user.model";
 
 import { UserSigninModel } from "../models/userSignin.model";
@@ -231,8 +232,8 @@ export const userProfile = async (user: UserModel, res: Response) => {
         user: {
           ...user,
           hearts: {
-            ...hearts,
-            total: totalHearts,
+            exchange: hearts,
+            totalHearts: (totalHearts[0] as MongooseGroup)?.total || 0,
             pending: { _id: 1 },
             approved: { _id: 2 },
             rejected: { _id: 3 },
@@ -246,6 +247,7 @@ export const userProfile = async (user: UserModel, res: Response) => {
       user: user,
     });
   } catch (error) {
+    console.log(error);
     res.status(500).json({
       success: false,
       message: "Interal server error",

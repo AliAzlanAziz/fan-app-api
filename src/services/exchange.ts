@@ -1,4 +1,5 @@
 import { Response } from "express";
+import { Types } from "mongoose";
 import {
   ExchangeStatus,
 } from "../enum/exchangeStatus.enum";
@@ -21,6 +22,7 @@ export const createExchange = async (
 ) => {
   try {
     const newExchange = new Exchange({
+      _id: new Types.ObjectId(),
       user: user._id,
       hearts: exchange.hearts,
       amount: exchange.hearts * 900, // amount = (hearts * unitPrice) - (hearts * unitPrice * 0.1), since unitPrice = 1000

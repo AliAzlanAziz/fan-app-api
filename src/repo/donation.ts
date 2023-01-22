@@ -11,7 +11,7 @@ export const findDonationsByUser = async (user: string) => {
     .populate("artist", "_id name imageUrl artist")
     .populate(
       "poster",
-      "_id title date location description fanNotes imageUrls"
+      "_id title date location description fanNotes imagesUrls"
     )
     .select({ createdAt: 0, user: 0 });
 };
@@ -24,10 +24,11 @@ export const findDonationsByPoster = async (poster: string) => {
 
 export const findArtistTotalHearts = async (artist: string) => {
   return await Donation.aggregate([
-    { $match: { artist: artist, status: 1 } }, //status = 1 (1=completed)
+    { $match: { artist: artist, status: 2 } }, //status = 2 (1=completed)
     {
       $group: {
-        totalHearts: {
+        _id: null,
+        total: {
           $sum: "$totalHearts",
         },
       },

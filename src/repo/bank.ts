@@ -3,7 +3,8 @@ import { BankModel } from "../models/bank.model";
 import Bank from "../schema/bank"
 
 export const findBankByUserId = async (user: string) => {
-    return await Bank.findOne({user: user});
+    return await Bank.findOne({user: user})
+                        .select({__v: 0});
 }
 
 export const updateBankById = async (id: string, bank: BankModel) => {

@@ -2,7 +2,8 @@ import { ExchangeStatus } from "../enum/exchangeStatus.enum";
 import Exchange from "../schema/exchange";
 
 export const findAllExchanges = async () => {
-  return await Exchange.find();
+  return await Exchange.find()
+                        .populate('user', '_id name artist imageUrl');
 };
 
 export const findExchangesByUser = async (user: string) => {

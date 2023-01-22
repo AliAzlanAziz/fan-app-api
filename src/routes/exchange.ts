@@ -1,5 +1,5 @@
 import express, { Router } from "express";
-import { checkReachable, getAllExchanges, getUserAllExchanges, postCreateExchange, postExchangeStatusToApproved, postExchangeStatusToRejected } from "../controllers/exchange";
+import { checkReachable, getAllExchanges, getUserAllExchanges, postCreateExchange, putExchangeStatusToApproved, putExchangeStatusToRejected } from "../controllers/exchange";
 import { isAdminAuthenticated } from "../middlewares/isAdminAuthenticated";
 import { isUserAuthenticated } from "../middlewares/isUserAuthenticated";
 
@@ -7,14 +7,14 @@ const router: Router = express.Router();
 
 router.get("/", checkReachable);
 
-router.get("/", isUserAuthenticated, postCreateExchange);
+router.post("/", isUserAuthenticated, postCreateExchange);
 
 router.get("/all", isUserAuthenticated, getUserAllExchanges);
 
 router.get("/admin/all", isAdminAuthenticated, getAllExchanges);
 
-router.post("/admin/accept", isAdminAuthenticated, postExchangeStatusToApproved);
+router.put("/admin/:exchangeId/accept", isAdminAuthenticated, putExchangeStatusToApproved);
 
-router.post("/admin/reject", isAdminAuthenticated, postExchangeStatusToRejected);
+router.put("/admin/:exchangeId/reject", isAdminAuthenticated, putExchangeStatusToRejected);
 
 export default router;
