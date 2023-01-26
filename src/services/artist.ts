@@ -64,7 +64,7 @@ export const artistProfileDetails = async (
 
     const [totalFavorites, isFavorite, posters] = await Promise.all([
       getFavoriteCountOfArtist(artistId),
-      isArtistFavoriteOfUser(artistId, user._id),
+      isArtistFavoriteOfUser(artistId, user?._id),
       getPostersByUserId(artistId),
     ]);
 

@@ -10,6 +10,7 @@ import { UserSigninModel } from "../models/userSignin.model";
 import { UserSignupModel } from "../models/userSignup.model";
 import { UserUpdateModel } from "../models/userUpdate.model";
 import {
+  decrementTotalFavoritesBy1,
   findTopNArtistsByMostFavoritesAndViewsCount,
   findUserByEmailAndRole,
   findUsersByArtistName,
@@ -30,21 +31,21 @@ export const signUp = async (user: UserSignupModel, res: Response) => {
   try {
     const userExist = await findUserByEmailAndRole(user.email, UserRoles.USER);
     if (userExist) {
-      return res.status(404).json({
+      return res.status(200).json({
         success: false,
-        message: "Error signing up!",
+        message: "An account already exists with entered email",
       });
     }
 
     if (!user.password || !user.confirmPassword) {
-      return res.status(400).json({
+      return res.status(200).json({
         success: false,
         message: "Must provide password and confirmPassword",
       });
     }
 
     if (user.password != user.confirmPassword) {
-      return res.status(400).json({
+      return res.status(200).json({
         success: false,
         message: "Password does not match with confirm password!",
       });
@@ -66,9 +67,20 @@ export const signUp = async (user: UserSignupModel, res: Response) => {
 
     await newUser.save();
 
+    const token = jwt.sign(
+      {
+        id: newUser._id,
+        role: newUser.role,
+      },
+      process.env.SECRET_KEY as string,
+      { expiresIn: "15d" }
+    );
+
     return res.status(200).json({
       success: true,
       message: "Successfully signed up!",
+        token: token,
+        user: user,
     });
   } catch (error) {
     return res.status(500).json({
@@ -82,9 +94,9 @@ export const signIn = async (user: UserSigninModel, res: Response) => {
   try {
     const result = await findUserByEmailAndRole(user.email, UserRoles.USER);
     if (!result) {
-      return res.status(404).json({
+      return res.status(200).json({
         success: false,
-        message: "User does not exist!",
+        message: "Incorrect email or password",
       });
     }
 
@@ -102,19 +114,20 @@ export const signIn = async (user: UserSigninModel, res: Response) => {
 
       return res.status(200).json({
         success: true,
-        message: "Successfully signed in!",
+        message: "Successfully signed in",
         token: token,
+        user: result,
       });
     } else {
-      return res.status(400).json({
+      return res.status(200).json({
         success: false,
-        message: "Incorrect Credentials!",
+        message: "Incorrect email or password",
       });
     }
   } catch (error) {
     return res.status(500).json({
       success: false,
-      message: "Error signing in!",
+      message: "Error signing in",
     });
   }
 };
@@ -123,9 +136,9 @@ export const adminSignUp = async (user: UserSignupModel, res: Response) => {
   try {
     const userExist = await findUserByEmailAndRole(user.email, UserRoles.ADMIN);
     if (userExist) {
-      return res.status(404).json({
+      return res.status(400).json({
         success: false,
-        message: "Error signing up!",
+        message: "An account already exists with entered email",
       });
     }
 
@@ -279,6 +292,8 @@ export const updateUserProfile = async (
 
     return res.status(200).json({
       success: true,
+      name: updatedUser?.name,
+      imageUrl: updatedUser?.imageUrl,
       message: "Successfully updated user!",
     });
   } catch (error) {
@@ -301,4 +316,8 @@ export const getUsersByArtistName = async (name: string) => {
 
 export const incrementUserTotalFavoritesBy1 = (userId: string) => {
   return incrementTotalFavoritesBy1(userId);
+};
+
+export const decrementUserTotalFavoritesBy1 = (userId: string) => {
+  return decrementTotalFavoritesBy1(userId);
 };

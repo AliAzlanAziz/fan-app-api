@@ -10,11 +10,11 @@ export const checkReachable = (
 };
 
 export const postAddArtistToUsersFavorite = (req: Request, res: Response, next: NextFunction) => {
-  return addArtistToUserFavorites(req.body.user._id, req.context.user, res);
+  return addArtistToUserFavorites(req.params.artistId, req.context.user, res);
 };
 
 export const deleteArtistFromUsersFavorite = (req: Request, res: Response, next: NextFunction) => {
-  return removeArtistFromUserFavorites(req.body.user._id, req.context.user, res);
+  return removeArtistFromUserFavorites(req.params.artistId, req.context.user, res);
 }
 
 export const getAllUserFavorites = (req: Request, res: Response, next: NextFunction) => {

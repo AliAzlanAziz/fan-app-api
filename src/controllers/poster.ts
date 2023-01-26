@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import { parsePosterDataFromRequestBody } from "../helpers/formDataParser";
-import { createPoster, posterDetails, removePoster, updatePoster, userAllPosters } from "../services/poster";
+import { createPoster, posterDetails, posterDetailsLess, removePoster, updatePoster, userAllPosters } from "../services/poster";
 
 export const checkReachable = (
   req: Request,
@@ -20,6 +20,10 @@ export const getUserAllPostersByParamsUserId = (req: Request, res: Response, nex
 
 export const getPosterDetails = (req: Request, res: Response, next: NextFunction) => {
   return posterDetails(req.params.posterId, res);
+};
+
+export const getPosterDetailsLess = (req: Request, res: Response, next: NextFunction) => {
+  return posterDetailsLess(req.params.posterId, res);
 };
 
 export const postPoster = (req: Request, res: Response, next: NextFunction) => {

@@ -8,7 +8,7 @@ import {
   findFavoritesByUser,
 } from "../repo/favorite";
 import Favorite from "../schema/favorite";
-import { incrementUserTotalFavoritesBy1 } from "./user";
+import { decrementUserTotalFavoritesBy1, incrementUserTotalFavoritesBy1 } from "./user";
 
 export const getFavoriteCountOfArtist = async (
   artistId: string
@@ -57,9 +57,12 @@ export const addArtistToUserFavorites = async (
       await newFavorite.save();
       incrementUserTotalFavoritesBy1(artistId);
 
+      const newCount = await findFavoriteCountByArtistId(artistId)
+
       return res.status(200).json({
         success: true,
         isFavorite: true,
+        newCount: newCount,
         message: "Artist added to favorite",
       });
     }
@@ -77,13 +80,30 @@ export const removeArtistFromUserFavorites = async (
   res: Response
 ) => {
   try {
-    await deleteFavoriteByArtistAndUser(artistId, user._id);
+    // const result = await Favorite.deleteMany({artist: artistId});
+    // console.log('result', result)
+    const favorite = await findFavoriteByArtistAndUser(artistId, user._id);
+
+    if (favorite) {
+      await deleteFavoriteByArtistAndUser(artistId, user._id);
+      decrementUserTotalFavoritesBy1(artistId);
+
+      const newCount = await findFavoriteCountByArtistId(artistId)
+        
+      return res.status(200).json({
+        success: true,
+        isFavorite: false,
+        newCount: newCount,
+        message: "Artist removed from favorites",
+      });
+    }
 
     return res.status(200).json({
       success: true,
       isFavorite: false,
-      message: "Artist removed from favorites",
+      message: "Artist not in your favorites",
     });
+
   } catch (error) {
     return res.status(500).json({
       success: false,

@@ -13,13 +13,15 @@ export const findDonationsByUser = async (user: string) => {
       "poster",
       "_id title date location description fanNotes imagesUrls"
     )
-    .select({ createdAt: 0, user: 0 });
+    .select({ user: 0 })
+    .sort({createdAt: -1});
 };
 
 export const findDonationsByPoster = async (poster: string) => {
-  return await Donation.find({ poster: poster }).select(
-    "_id quantity totalHearts totalPrice status packageCopy"
-  );
+  return await Donation.find({ poster: poster })
+  .populate("user", "_id name imageUrl artist")
+  .select("_id quantity totalHearts totalPrice status packageCopy createdAt")
+  .sort({createdAt: -1});
 };
 
 export const findArtistTotalHearts = async (artist: string) => {

@@ -12,6 +12,7 @@ export class UserModel {
     role: UserRoles;
     totalViews: number;
     totalFavorites: number;
+    totalPosters: number;
 
     constructor(user: any){
         this._id = user._id;
@@ -25,5 +26,6 @@ export class UserModel {
         this.role = user.role;
         this.totalViews = user.totalViews;
         this.totalFavorites = user.totalFavorites;
+        this.totalPosters = user.totalPosters;
     }
 }

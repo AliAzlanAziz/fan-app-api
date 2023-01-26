@@ -18,11 +18,11 @@ export const checkReachable = (
 };
 
 export const postSignup = (req: Request, res: Response, next: NextFunction) => {
-  return signUp(req.body.user, res);
+  return signUp(req.body, res);
 };
 
 export const postSignin = (req: Request, res: Response, next: NextFunction) => {
-  return signIn(req.body.user, res);
+  return signIn(req.body, res);
 };
 
 export const postAdminSignup = (req: Request, res: Response, next: NextFunction) => {

@@ -40,9 +40,9 @@ export const isUserAuthenticated = async (
     req.context = getContext(result);
     return next();
   } catch (error) {
-    return res.status(500).json({
+    return res.status(401).json({
       success: false,
-      message: "Internal Server Error!",
+      message: "Unauthorized Access!",
     });
   }
 };

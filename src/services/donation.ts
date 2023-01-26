@@ -19,9 +19,9 @@ export const createDonation = async (
         message: "Donation status must be provided, 1=Failed, Any number other than 1=Success",
       });
     } else if (donation?.status == 1) {
-      return res.status(400).json({
-        success: true,
-        message: "Donation Failed!",
+      return res.status(200).json({
+        success: false,
+        message: "Payment failed. This error is force generated.",
       });
     }
 
@@ -45,6 +45,7 @@ export const createDonation = async (
       package: donation.package,
       quantity: donation.quantity,
       packageCopy: {
+        name: donationPackage.name,
         hearts: donationPackage.hearts,
         price: donationPackage.price,
       },

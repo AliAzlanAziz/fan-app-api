@@ -22,7 +22,15 @@ export const decrementTotalFavoritesBy1 = async (id: string) => {
     return await User.findOneAndUpdate({_id: id, totalFavorites: { $gt: 0 }}, { $inc: {totalFavorites: -1}});
 }
 
-export const updateUserById = async (id: string, user: { name:string, email:string, password:string|undefined, imageUrl:string|undefined }) => {
+export const incrementTotalPostersBy1 = async (id: string) => {
+    return await User.findByIdAndUpdate(id, { $inc: {totalPosters: 1}});
+}
+
+export const decrementTotalPostersBy1 = async (id: string) => {
+    return await User.findOneAndUpdate({_id: id, totalPosters: { $gt: 0 }}, { $inc: {totalPosters: -1}});
+}
+
+export const updateUserById = async (id: string, user: { name:string, password:string|undefined, imageUrl:string|undefined }) => {
     return await User.findByIdAndUpdate(id, user);
 }
 
@@ -32,7 +40,7 @@ export const findUserByArtistName = async (name: string) => {
 
 export const findUsersByArtistName = async (name: string) => {
     return await User.find({'artist.name': {'$regex': name, '$options': 'ix'}})
-                        .select("_id name artist imageUrl totalViews totalFavorites");
+                        .select("_id name artist imageUrl totalViews totalFavorites totalPosters");
 }
 
 export const updateUserArtistProfileById = async (id: string, artist: ArtistUpdateModel) => {
@@ -41,7 +49,7 @@ export const updateUserArtistProfileById = async (id: string, artist: ArtistUpda
 
 export const findTopNArtistsByMostFavoritesAndViewsCount = async (limit: number) => {
     return await User.find({ 'artist.name': { $ne: null } })
-                        .select('_id name imageUrl artist totalFavorites totalViews')
+                        .select('_id name imageUrl artist totalFavorites totalViews totalPosters')
                         .sort({totalFavorites: -1, totalViews: -1})
                         .limit(limit);
 }

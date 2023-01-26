@@ -6,9 +6,9 @@ const router: Router = express.Router();
 
 router.get("/", checkReachable);
 
-router.post("/", isUserAuthenticated, postAddArtistToUsersFavorite);
+router.post("/:artistId", isUserAuthenticated, postAddArtistToUsersFavorite);
 
-router.delete("/", isUserAuthenticated, deleteArtistFromUsersFavorite);
+router.delete("/:artistId", isUserAuthenticated, deleteArtistFromUsersFavorite);
 
 router.get("/all", isUserAuthenticated, getAllUserFavorites);
 

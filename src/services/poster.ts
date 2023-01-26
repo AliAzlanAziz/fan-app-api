@@ -67,6 +67,33 @@ export const posterDetails = async (posterId: string, res: Response) => {
   }
 };
 
+export const posterDetailsLess = async (posterId: string, res: Response) => {
+  try {
+    let poster = await findPosterById(posterId);
+    if (poster) {
+      const totalFavorites = getFavoriteCountOfArtist(poster?.user as string)
+      poster = await populatePosterUser(poster);
+
+      incrementTotalViewsBy1(posterId);
+      return res.status(200).json({
+        success: true,
+        poster: poster,
+        totalFavorites: totalFavorites,
+      });
+    } else {
+      return res.status(400).json({
+        success: false,
+        message: "Poster does not exist!",
+      });
+    }
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "Internal server error",
+    });
+  }
+};
+
 export const createPoster = async (
   user: UserModel,
   poster: PosterModel,

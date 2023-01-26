@@ -14,5 +14,5 @@ export const putArtistProfile = (req: Request, res: Response, next: NextFunction
 };
 
 export const getArtistProfileDetails = (req: Request, res: Response, next: NextFunction) => {
-  return artistProfileDetails(req.context.user, req.params.artistId, res);
+  return artistProfileDetails(req?.context?.user, req.params.artistId, res);
 };

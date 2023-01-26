@@ -1,0 +1,1075 @@
+{
+	"info": {
+		"_postman_id": "a179082f-86ed-4d4b-86c0-fc8cae616267",
+		"name": "fan-app",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "user routes",
+			"item": [
+				{
+					"name": "sign up",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user\": {\r\n        \"name\": \"C\",\r\n        \"email\": \"c@gmail.com\",\r\n        \"password\": \"books\",\r\n        \"confirmPassword\": \"books\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/user/signup",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"user",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "sign in",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user\": {\r\n        \"email\": \"c@gmail.com\",\r\n        \"password\": \"books\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/user/signin",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"user",
+								"signin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "admin sign up",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user\": {\r\n        \"name\": \"admin\",\r\n        \"email\": \"admin@gmail.com\",\r\n        \"password\": \"books\",\r\n        \"confirmPassword\": \"books\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/user/admin/signup",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"user",
+								"admin",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "admin sign in",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user\": {\r\n        \"email\": \"admin@gmail.com\",\r\n        \"password\": \"books\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/user/admin/signin",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"user",
+								"admin",
+								"signin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user profile",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/user/profile",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"user",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user profile",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Users/USER/Downloads/delete after use/Greedom/crowd.jpg"
+								},
+								{
+									"key": "name",
+									"value": "A",
+									"type": "default"
+								},
+								{
+									"key": "email",
+									"value": "a@gmail.com",
+									"type": "default"
+								},
+								{
+									"key": "isUpdatingPassword",
+									"value": "true",
+									"type": "default"
+								},
+								{
+									"key": "password",
+									"value": "books",
+									"type": "default"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/user/profile",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"user",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "artist routes",
+			"item": [
+				{
+					"name": "artist profile",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"artist\": {\r\n        \"name\": \"BBB\",\r\n        \"description\": \"I am BBB\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/artist/profile",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"artist",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "artist profile details of any user",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/artist/profile/63cd16dca9b97ec89e5fdfc8",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"artist",
+								"profile",
+								"63cd16dca9b97ec89e5fdfc8"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "common routes",
+			"item": [
+				{
+					"name": "top 5 artists and posters",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/common/top-artists-and-posters",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"common",
+								"top-artists-and-posters"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "search artist and posters",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/common/search?nameOrTitle=c",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"common",
+								"search"
+							],
+							"query": [
+								{
+									"key": "nameOrTitle",
+									"value": "c"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "poster routes",
+			"item": [
+				{
+					"name": "poster",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "AAA Poster 2",
+									"type": "default"
+								},
+								{
+									"key": "description",
+									"value": "AAA Poster 2",
+									"type": "default"
+								},
+								{
+									"key": "date",
+									"value": "2023-01-17T18:29:46.357Z",
+									"type": "default"
+								},
+								{
+									"key": "location",
+									"value": "Dehli",
+									"type": "default"
+								},
+								{
+									"key": "fanNotes",
+									"value": "Must watch this poster",
+									"type": "default"
+								},
+								{
+									"key": "images",
+									"type": "file",
+									"src": [
+										"/C:/Users/USER/Downloads/delete after use/Greedom/a0280651a3e64041b7c2fac892fbf80a.jpg",
+										"/C:/Users/USER/Downloads/delete after use/Greedom/f0653ba5e89276f9f2d2cf70a85d12b6.jpg"
+									]
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/poster/create",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"poster",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "poster",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "_id",
+									"value": "63cd1a47ec44fc23f3604bcb",
+									"type": "text"
+								},
+								{
+									"key": "title",
+									"value": "AAA Poster 1 Updated",
+									"type": "default"
+								},
+								{
+									"key": "description",
+									"value": "AAA Poster 1 Updated",
+									"type": "default"
+								},
+								{
+									"key": "date",
+									"value": "2023-01-17T18:29:46.357Z",
+									"type": "default"
+								},
+								{
+									"key": "location",
+									"value": "Dilli",
+									"type": "text"
+								},
+								{
+									"key": "fanNotes",
+									"value": "Must watch this poster",
+									"type": "default"
+								},
+								{
+									"key": "images",
+									"type": "file",
+									"src": [
+										"/C:/Users/USER/Downloads/delete after use/Greedom/greedom dp.jpg",
+										"/C:/Users/USER/Downloads/delete after use/Greedom/giant-boot-stepping-tiny-worker-holding-megaphone_74855-19786.jpg",
+										"/C:/Users/USER/Downloads/delete after use/Greedom/995598_OI2QJX0.jpg"
+									]
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/poster/update",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"poster",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "poster",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/poster/delete/63cd1a32ec44fc23f3604bc8",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"poster",
+								"delete",
+								"63cd1a32ec44fc23f3604bc8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "logged in user posters",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/poster/all",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"poster",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "posters of user",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "Phata Poster",
+									"type": "default"
+								},
+								{
+									"key": "description",
+									"value": "Phata poster nikla hero",
+									"type": "default"
+								},
+								{
+									"key": "date",
+									"value": "2023-01-17T18:29:46.357Z",
+									"type": "default"
+								},
+								{
+									"key": "location",
+									"value": "Mumbai",
+									"type": "default"
+								},
+								{
+									"key": "fanNotes",
+									"value": "Must watch this poster",
+									"type": "default"
+								},
+								{
+									"key": "images",
+									"type": "file",
+									"src": [
+										"/C:/Users/USER/Downloads/delete after use/Greedom/7996051.jpg",
+										"/C:/Users/USER/Downloads/delete after use/Greedom/7997046.jpg",
+										"/C:/Users/USER/Downloads/delete after use/Greedom/24374022_14688.jpg"
+									]
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/poster/user/63cd16dca9b97ec89e5fdfc8",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"poster",
+								"user",
+								"63cd16dca9b97ec89e5fdfc8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "poster details",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/poster/details/63cd1a32ec44fc23f3604bc8",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"poster",
+								"details",
+								"63cd1a32ec44fc23f3604bc8"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "favorites routes",
+			"item": [
+				{
+					"name": "add artist to favorite",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user\": {\r\n        \"_id\": \"63cd16dca9b97ec89e5fdfc8\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/favorite",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"favorite"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "remove artist from favorite",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user\": {\r\n        \"_id\": \"63cd16dca9b97ec89e5fdfc8\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/favorite",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"favorite"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user favorites",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/favorite/all",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"favorite",
+								"all"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "bank routes",
+			"item": [
+				{
+					"name": "bank information",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/bank/information",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"bank",
+								"information"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "bank information",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "fullName",
+									"value": "AAA AAA AAA",
+									"type": "text"
+								},
+								{
+									"key": "idNumber",
+									"value": "1111111111111111111111111",
+									"type": "text"
+								},
+								{
+									"key": "bankAccount",
+									"value": "MCB Bank",
+									"type": "text"
+								},
+								{
+									"key": "accountOwnerName",
+									"value": "AAA AAA AAA",
+									"type": "text"
+								},
+								{
+									"key": "doc",
+									"type": "file",
+									"src": "/C:/Users/USER/Downloads/delete after use/Netflix-Passport.pdf"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/bank/information",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"bank",
+								"information"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "admin all bank information list",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/bank/admin/all",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"bank",
+								"admin",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "admin accept bank information",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/bank/admin/63cd2a042c89d66641260d85/accept",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"bank",
+								"admin",
+								"63cd2a042c89d66641260d85",
+								"accept"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "admin reject bank information",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/bank/admin/63cd2a042c89d66641260d85/reject",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"bank",
+								"admin",
+								"63cd2a042c89d66641260d85",
+								"reject"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "comment routes",
+			"item": [
+				{
+					"name": "comment",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"comment\": {\r\n        \"poster\": \"63cd1a32ec44fc23f3604bc8\",\r\n        \"text\": \"You got this! 100\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/comment",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"comment"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "package routes",
+			"item": [
+				{
+					"name": "all packages",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/package/all",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"package",
+								"all"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "donation routes",
+			"item": [
+				{
+					"name": "donate",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"donation\": {\r\n        \"poster\": \"63cd1a32ec44fc23f3604bc8\",\r\n        \"package\": \"63cd312d5325c59800fdcba5\",\r\n        \"quantity\": 5,\r\n        \"status\": 2\r\n   }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/donation/",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"donation",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "donation history of user(fan)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/donation/fan",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"donation",
+								"fan"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "donation history of user(artist)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/donation/artist",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"donation",
+								"artist"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "exchange routes",
+			"item": [
+				{
+					"name": "exchange",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"exchange\": {\r\n        \"hearts\": 20\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/exchange/",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"exchange",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user all exchanges",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/exchange/all",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"exchange",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "admin list all exchanges",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"exchange\": {\r\n        \"hearts\": 20\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/exchange/admin/all",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"exchange",
+								"admin",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "admin accept exchange",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"exchange\": {\r\n        \"hearts\": 20\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/exchange/admin/63cd4479c34ec0066b4f6e0d/accept",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"exchange",
+								"admin",
+								"63cd4479c34ec0066b4f6e0d",
+								"accept"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "admin reject exchange",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"exchange\": {\r\n        \"hearts\": 20\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/exchange/admin/63cd43fd5d2793b3e78db1c3/reject",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"exchange",
+								"admin",
+								"63cd43fd5d2793b3e78db1c3",
+								"reject"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "server running?",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}",
+					"host": [
+						"{{host}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzY2QxNmRjYTliOTdlYzg5ZTVmZGZjOCIsInJvbGUiOjEsImlhdCI6MTY3NDM4NTE1NiwiZXhwIjoxNjc1NjgxMTU2fQ.3swAO7IswD3yoTymaQJRwtVCX_FX9gKtkazWl24BgJ4",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "host",
+			"value": "https://tasty-dog-fashion.cyclic.app/",
+			"type": "default"
+		},
+		{
+			"key": "authToken",
+			"value": "",
+			"type": "default"
+		}
+	]
+}

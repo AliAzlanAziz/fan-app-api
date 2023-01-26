@@ -11,7 +11,7 @@ export const parseUserUpdateDataFromRequestBody = (req: Request): UserUpdateMode
         req.body.isUpdatingPassword = false;
     }
 
-    return new UserUpdateModel(req.body.name, req.body.email, req.body.isUpdatingPassword, req.body.password, req.file?.filename);
+    return new UserUpdateModel(req.body.name, req.body.isUpdatingPassword, req.body.password, req.file?.filename);
 }
 
 export const parseBankUpdateDataFromRequestBody = (req: Request): BankModel => {
