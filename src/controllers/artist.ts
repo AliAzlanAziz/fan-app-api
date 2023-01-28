@@ -10,7 +10,7 @@ export const checkReachable = (
 };
 
 export const putArtistProfile = (req: Request, res: Response, next: NextFunction) => {
-  return updateArtistProfile(req.context.user, req.body.artist, res);
+  return updateArtistProfile(req.context.user, req, res);
 };
 
 export const getArtistProfileDetails = (req: Request, res: Response, next: NextFunction) => {

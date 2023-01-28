@@ -47,8 +47,11 @@ export const updateBankInformation = async (
       await newBank.save();
     }
 
+    const updatedBank = await findBankByUserId(user._id);
+
     return res.status(200).json({
       success: true,
+      bank: updatedBank,
       message: "Successfully updated bank information!",
     });
   } catch (error) {

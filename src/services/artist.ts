@@ -1,4 +1,4 @@
-import { Response } from "express";
+import { Request, Response } from "express";
 import { ArtistUpdateModel } from "../models/artistUpdate.model";
 import { UserModel } from "../models/user.model";
 
@@ -13,30 +13,38 @@ import { getPostersByUserId } from "./poster";
 
 export const updateArtistProfile = async (
   user: UserModel,
-  updatedArtist: ArtistUpdateModel,
+  req: Request,
   res: Response
 ) => {
   try {
-    if (updatedArtist?.name?.length == 0) {
-      return res.status(400).json({
+    if (req.body?.name?.length == 0) {
+      return res.status(200).json({
         success: false,
         message: "Artist name length must be atleast 1 character",
       });
     }
 
-    const doesArtistExist = await findUserByArtistName(updatedArtist.name);
+    const doesArtistExist = await findUserByArtistName(req.body?.name);
     if (doesArtistExist && doesArtistExist.artist?.name != user.artist.name) {
-      return res.status(400).json({
+      return res.status(200).json({
         success: false,
         uniqueName: false,
         message: "Artist name already taken",
       });
     }
 
-    await updateUserArtistProfileById(user._id, updatedArtist);
+    await updateUserArtistProfileById(user._id, {
+      imageUrl: req.file?.filename,
+      artist: {
+        name: req.body?.name,
+        description: req.body?.description,
+      }
+    });
 
     return res.status(200).json({
       success: true,
+      name: req.body?.name,
+      imageUrl: req.file?.filename,
       message: "Successfully updated user's artist profile!",
     });
   } catch (error) {

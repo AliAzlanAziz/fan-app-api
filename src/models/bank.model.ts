@@ -4,6 +4,7 @@ export class BankModel {
     bankAccount: string;
     accountOwnerName: string;
     fileUrl: string|undefined;
+    status: number;
 
     constructor(fullName: string, idNumber: string, bankAccount: string, accountOwnerName: string, fileUrl: string|undefined){
         this.fullName = fullName;
@@ -11,5 +12,6 @@ export class BankModel {
         this.bankAccount = bankAccount;
         this.accountOwnerName = accountOwnerName;
         this.fileUrl = fileUrl;
+        this.status = 1;
     }
 }

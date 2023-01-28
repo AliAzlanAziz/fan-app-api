@@ -43,8 +43,8 @@ export const findUsersByArtistName = async (name: string) => {
                         .select("_id name artist imageUrl totalViews totalFavorites totalPosters");
 }
 
-export const updateUserArtistProfileById = async (id: string, artist: ArtistUpdateModel) => {
-    return await User.findByIdAndUpdate(id, {artist: artist});
+export const updateUserArtistProfileById = async (id: string, updateModel: any) => {
+    return await User.findByIdAndUpdate(id, updateModel);
 }
 
 export const findTopNArtistsByMostFavoritesAndViewsCount = async (limit: number) => {

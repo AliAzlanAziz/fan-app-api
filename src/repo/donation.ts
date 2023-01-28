@@ -3,7 +3,11 @@ import Donation from "../schema/donation";
 export const findDonationsByArtist = async (artist: string) => {
   return await Donation.find({ artist: artist })
     .populate("user", "_id name imageUrl")
-    .select({ createdAt: 0, artist: 0 });
+    .populate(
+      "poster",
+      "_id title date location description fanNotes imagesUrls"
+    )
+    .sort({createdAt: -1});
 };
 
 export const findDonationsByUser = async (user: string) => {

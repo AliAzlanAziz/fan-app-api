@@ -14,8 +14,10 @@ router.put("/information", isUserAuthenticated, multerFileUploader.single('doc')
 
 router.get("/admin/all", isAdminAuthenticated, getAllBanks);
 
-router.put("/admin/:bankId/accept", isAdminAuthenticated, putBankStatusToApproved);
+//router.put("/admin/:bankId/accept", isAdminAuthenticated, putBankStatusToApproved);
+router.put("/admin/:bankId/accept", isUserAuthenticated, putBankStatusToApproved);
 
-router.put("/admin/:bankId/reject", isAdminAuthenticated, putBankStatusToRejected);
+//router.put("/admin/:bankId/reject", isAdminAuthenticated, putBankStatusToRejected);
+router.put("/admin/:bankId/reject", isUserAuthenticated, putBankStatusToRejected);
 
 export default router;
