@@ -14,7 +14,7 @@ export const createDonation = async (
 ) => {
   try {
     if (!donation?.status) {
-      return res.status(400).json({
+      return res.status(200).json({
         success: false,
         message: "Donation status must be provided, 1=Failed, Any number other than 1=Success",
       });
@@ -31,7 +31,7 @@ export const createDonation = async (
     ]);
 
     if (!poster || !donationPackage) {
-      return res.status(400).json({
+      return res.status(200).json({
         success: false,
         message: "Cannote donate! Invalid Poster or Package",
       });

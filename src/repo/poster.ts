@@ -12,7 +12,7 @@ export const findTopNPostersByMostDonationsAndViewsCount = async (limit: number)
 export const findPostersByUserId = async (user: string) => {
     return await Poster.find({user: user})
                         .populate('user', '_id name imageUrl artist totalFavorites')
-                        .select('_id title date location imagesUrls user');
+                        .select('_id title date location imagesUrls fanNotes user');
 }
 
 export const findPosterById = async (id: string) => {
