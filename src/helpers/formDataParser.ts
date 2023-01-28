@@ -17,9 +17,3 @@ export const parseUserUpdateDataFromRequestBody = (req: Request): UserUpdateMode
 export const parseBankUpdateDataFromRequestBody = (req: Request): BankModel => {
     return new BankModel(req.body.fullName, req.body.idNumber, req.body.bankAccount, req.body.accountOwnerName, req.file?.filename);
 }
-
-export const parsePosterDataFromRequestBody = (req: Request): PosterModel => {
-    const imagesUrls: string[] = (req.files as Express.Multer.File[])?.map((file: any) => file.filename);
-
-    return new PosterModel(req.body._id, req.body.title, req.body.date, req.body.location, req.body.description, req.body.fanNotes, imagesUrls);
-}

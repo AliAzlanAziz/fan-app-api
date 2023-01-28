@@ -125,6 +125,22 @@ export const createPoster = async (
   }
 };
 
+export const returnImagesUrls = (files: Express.Multer.File[],  res: Response) => {
+  try{
+    const imagesUrls: string[] = files?.map(file => file.filename);
+
+    return res.status(200).json({
+      success: true,
+      imagesUrls: imagesUrls
+    })
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "Internal server error",
+    });
+  }    
+}
+
 export const updatePoster = async (poster: PosterModel, res: Response) => {
   try {
     if (poster._id) {

@@ -1,6 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import { parsePosterDataFromRequestBody } from "../helpers/formDataParser";
-import { createPoster, posterDetails, posterDetailsLess, removePoster, updatePoster, userAllPosters } from "../services/poster";
+import { createPoster, posterDetails, posterDetailsLess, removePoster, returnImagesUrls, updatePoster, userAllPosters } from "../services/poster";
 
 export const checkReachable = (
   req: Request,
@@ -26,12 +25,16 @@ export const getPosterDetailsLess = (req: Request, res: Response, next: NextFunc
   return posterDetailsLess(req.params.posterId, res);
 };
 
+export const postImages = (req: Request, res: Response, next: NextFunction) => {
+  return returnImagesUrls(req.files as Express.Multer.File[], res);
+};
+
 export const postPoster = (req: Request, res: Response, next: NextFunction) => {
-  return createPoster(req.context.user, parsePosterDataFromRequestBody(req), res);
+  return createPoster(req.context.user, req.body.poster, res);
 };
 
 export const putPoster = (req: Request, res: Response, next: NextFunction) => {
-  return updatePoster(parsePosterDataFromRequestBody(req), res);
+  return updatePoster(req.body.poster, res);
 };
 
 export const deletePoster = (req: Request, res: Response, next: NextFunction) => {
