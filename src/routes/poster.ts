@@ -20,7 +20,7 @@ router.post("/create", isUserAuthenticated, postPoster);
 
 router.put("/update", isUserAuthenticated, isUserAuthorized, putPoster);
 
-router.put("/images", isUserAuthenticated,  multerImageUploader.array('images', 3), postImages);
+router.post("/images", isUserAuthenticated,  multerImageUploader.array('images', 3), postImages);
 
 router.delete("/delete/:posterId", isUserAuthenticated, isUserAuthorized, deletePoster);
 

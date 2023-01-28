@@ -10,7 +10,7 @@ export const isUserAuthorized = async (
   next: NextFunction
 ) => {
   try {
-    const id = req.body._id || req.params.posterId; // we know this _id is of poster id attached to form data, later we parse it and access by poster._id
+    const id = req.body.poster._id || req.params.posterId; // we know this _id is of poster id attached to form data, later we parse it and access by poster._id
     if (!id) {
       deleteUplaodedFiles(req);
 
