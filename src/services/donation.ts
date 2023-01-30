@@ -46,6 +46,7 @@ export const createDonation = async (
       quantity: donation.quantity,
       packageCopy: {
         name: donationPackage.name,
+        icon: donationPackage.icon,
         hearts: donationPackage.hearts,
         price: donationPackage.price,
       },

@@ -29,6 +29,7 @@ const donationSchema = new Schema({
   totalPrice: { type: Number, required: true }, // package.price x quantity
   packageCopy: {
     name: { type: String, required: true },
+    icon: { type: String, required: true },
     hearts: { type: Number, required: true },
     price: { type: Number, required: true },
   },
