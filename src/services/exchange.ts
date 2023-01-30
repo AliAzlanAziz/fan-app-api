@@ -24,6 +24,12 @@ export const createExchange = async (
   res: Response
 ) => {
   try {
+    if(exchange.hearts < 1){
+      return res.status(200).json({
+        success: false,
+        message: 'Cannot create exchange request. Minimum hearts to exchange is 1',
+      })
+    }
     const [totalHearts, hearts] = await Promise.all([
       getArtistTotalHearts(user._id),
       getUserHeartsSumGroupByStatus(user._id),
@@ -31,18 +37,25 @@ export const createExchange = async (
     const total = (totalHearts[0] as MongooseGroup)?.total || 0;
     const remaining = total - hearts.pending - hearts.approved;
     if(remaining < exchange.hearts){
-      return res.status(400).json({
+      return res.status(200).json({
         success: false,
         message: 'Cannot create exchange request, Insufficient hearts',
         remaining: remaining
       })
     }
 
+    var baseAmount = exchange.hearts * 240
+    var tax1 = baseAmount * 0.03
+    tax1 = Math.floor(tax1 / 10) * 10
+    var tax2 = tax1 / 10
+    tax2 = Math.floor(tax2 / 10) * 10
+    var amount = baseAmount - tax1 - tax2
+
     const newExchange = new Exchange({
       _id: new Types.ObjectId(),
       user: user._id,
       hearts: exchange.hearts,
-      amount: exchange.hearts * 900, // amount = (hearts * unitPrice) - (hearts * unitPrice * 0.1), since unitPrice = 1000
+      amount: amount, // amount = (hearts * unitPrice) - (hearts * unitPrice * 0.1), since unitPrice = 1000
       // (simplifying we get)=> hearts * 900
       status: ExchangeStatus.PENDING,
     });
@@ -52,6 +65,7 @@ export const createExchange = async (
     return res.status(200).json({
       success: true,
       message: "Successfully created Exchange request!",
+      remaining: remaining - exchange.hearts,
     });
   } catch (error) {
     return res.status(500).json({

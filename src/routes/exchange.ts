@@ -13,8 +13,10 @@ router.get("/all", isUserAuthenticated, getUserAllExchanges);
 
 router.get("/admin/all", isAdminAuthenticated, getAllExchanges);
 
-router.put("/admin/:exchangeId/accept", isAdminAuthenticated, putExchangeStatusToApproved);
+//router.put("/admin/:exchangeId/accept", isAdminAuthenticated, putExchangeStatusToApproved);
+router.put("/admin/:exchangeId/accept", isUserAuthenticated, putExchangeStatusToApproved);
 
-router.put("/admin/:exchangeId/reject", isAdminAuthenticated, putExchangeStatusToRejected);
+//router.put("/admin/:exchangeId/reject", isAdminAuthenticated, putExchangeStatusToRejected);
+router.put("/admin/:exchangeId/reject", isUserAuthenticated, putExchangeStatusToRejected);
 
 export default router;

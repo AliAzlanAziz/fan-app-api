@@ -14,6 +14,6 @@ export const deleteFavoriteByArtistAndUser = async (artist: string, user: string
 
 export const findFavoritesByUser = async (user: string) => {
     return await Favorite.find({user: user})
-                            .populate('artist', '_id name artist imageUrl totalFavorites')
+                            .populate('artist', '_id name artist imageUrl totalFavorites totalPosters')
                             .select('_id artist');
 }

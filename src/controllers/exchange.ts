@@ -14,7 +14,7 @@ export const postCreateExchange = (
   res: Response,
   next: NextFunction
 ) => {
-  return createExchange(req.body.exchange, req.context.user, res);
+  return createExchange(req.body, req.context.user, res);
 };
 
 export const getAllExchanges = (

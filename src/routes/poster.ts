@@ -18,7 +18,7 @@ router.get("/details-less/:posterId", getPosterDetailsLess);
 
 router.post("/create", isUserAuthenticated, postPoster);
 
-router.put("/update", isUserAuthenticated, isUserAuthorized, putPoster);
+router.put("/update/:posterId", isUserAuthenticated, isUserAuthorized, putPoster);
 
 router.post("/images", isUserAuthenticated,  multerImageUploader.array('images', 3), postImages);
 

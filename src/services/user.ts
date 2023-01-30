@@ -11,10 +11,12 @@ import { UserSignupModel } from "../models/userSignup.model";
 import { UserUpdateModel } from "../models/userUpdate.model";
 import {
   decrementTotalFavoritesBy1,
+  decrementTotalPostersBy1,
   findTopNArtistsByMostFavoritesAndViewsCount,
   findUserByEmailAndRole,
   findUsersByArtistName,
   incrementTotalFavoritesBy1,
+  incrementTotalPostersBy1,
   updateUserById,
 } from "../repo/user";
 import User from "../schema/user";
@@ -320,4 +322,12 @@ export const incrementUserTotalFavoritesBy1 = (userId: string) => {
 
 export const decrementUserTotalFavoritesBy1 = (userId: string) => {
   return decrementTotalFavoritesBy1(userId);
+};
+
+export const incrementUserTotalPostersBy1 = (userId: string) => {
+  return incrementTotalPostersBy1(userId);
+};
+
+export const decrementUserTotalPostersBy1 = (userId: string) => {
+  return decrementTotalPostersBy1(userId);
 };

@@ -70,8 +70,7 @@ export const artistProfileDetails = async (
       });
     }
 
-    const [totalFavorites, isFavorite, posters] = await Promise.all([
-      getFavoriteCountOfArtist(artistId),
+    const [isFavorite, posters] = await Promise.all([
       isArtistFavoriteOfUser(artistId, user?._id),
       getPostersByUserId(artistId),
     ]);
@@ -84,8 +83,8 @@ export const artistProfileDetails = async (
         _id: userArtist._id,
         artist: userArtist.artist,
         imageUrl: userArtist.imageUrl,
-        totalFavorites: totalFavorites,
-        totalPosters: posters.length,
+        totalFavorites: userArtist.totalFavorites,
+        totalPosters: userArtist.totalPosters,
         posters: posters,
         isFavorite: isFavorite,
       },

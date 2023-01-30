@@ -1,4 +1,6 @@
 import { Response } from "express";
+import Poster from "../schema/poster";
+import User from "../schema/user";
 import {
   getPostersByTitle,
   getTopNPostersByMostDonationsAndViewsCount,

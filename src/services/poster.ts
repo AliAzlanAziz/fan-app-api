@@ -17,6 +17,7 @@ import Poster from "../schema/poster";
 import { getCommentsByPoster } from "./comment";
 import { getDonationsByPoster } from "./donation";
 import { getFavoriteCountOfArtist } from "./favorite";
+import { decrementUserTotalPostersBy1, incrementUserTotalPostersBy1 } from "./user";
 
 export const userAllPosters = async (userId: string, res: Response) => {
   try {
@@ -38,9 +39,8 @@ export const posterDetails = async (posterId: string, res: Response) => {
   try {
     let poster = await findPosterById(posterId);
     if (poster) {
-      const [comments, totalFavorites, donations] = await Promise.all([
+      const [comments, donations] = await Promise.all([
         getCommentsByPoster(posterId),
-        getFavoriteCountOfArtist(poster?.user as string),
         getDonationsByPoster(posterId),
       ]);
       poster = await populatePosterUser(poster);
@@ -50,7 +50,6 @@ export const posterDetails = async (posterId: string, res: Response) => {
         success: true,
         poster: poster,
         comments: comments,
-        totalFavorites: totalFavorites,
         donations: donations,
       });
     } else {
@@ -71,14 +70,12 @@ export const posterDetailsLess = async (posterId: string, res: Response) => {
   try {
     let poster = await findPosterById(posterId);
     if (poster) {
-      const totalFavorites = getFavoriteCountOfArtist(poster?.user as string)
       poster = await populatePosterUser(poster);
 
       incrementTotalViewsBy1(posterId);
       return res.status(200).json({
         success: true,
         poster: poster,
-        totalFavorites: totalFavorites,
       });
     } else {
       return res.status(400).json({
@@ -100,6 +97,24 @@ export const createPoster = async (
   res: Response
 ) => {
   try {
+    if(poster.imagesUrls.length == 0){
+      return res.status(200).json({
+        success: false,
+        message: 'Upload atlteast 1 image',
+      })
+    }
+
+    console.log({
+      _id: new Types.ObjectId(),
+      title: poster.title,
+      date: poster.date,
+      description: poster.description,
+      fanNotes: poster.fanNotes,
+      location: poster.location,
+      imagesUrls: poster.imagesUrls,
+      user: user._id,
+    })
+
     const newPoster = new Poster({
       _id: new Types.ObjectId(),
       title: poster.title,
@@ -112,6 +127,7 @@ export const createPoster = async (
     });
 
     await newPoster.save();
+    incrementUserTotalPostersBy1(user._id);
 
     return res.status(200).json({
       success: true,
@@ -121,6 +137,7 @@ export const createPoster = async (
     return res.status(500).json({
       success: false,
       message: "Internal server error",
+      error: error
     });
   }
 };
@@ -141,10 +158,10 @@ export const returnImagesUrls = (files: Express.Multer.File[],  res: Response) =
   }    
 }
 
-export const updatePoster = async (poster: PosterModel, res: Response) => {
+export const updatePoster = async (posterId: string, poster: PosterModel, res: Response) => {
   try {
-    if (poster._id) {
-      await updatePosterById(poster._id, poster);
+    if (posterId) {
+      await updatePosterById(posterId, poster);
     }
 
     return res.status(200).json({
@@ -159,13 +176,14 @@ export const updatePoster = async (poster: PosterModel, res: Response) => {
   }
 };
 
-export const removePoster = async (id: string, res: Response) => {
+export const removePoster = async (user: UserModel, id: string, res: Response) => {
   try {
     await deletePosterById(id);
+    decrementUserTotalPostersBy1(user._id);
 
     return res.status(200).json({
       success: true,
-      message: "Successfully deleted poster",
+      message: "Poster deleted successfully",
     });
   } catch (error) {
     return res.status(500).json({

@@ -10,21 +10,21 @@ export const isUserAuthorized = async (
   next: NextFunction
 ) => {
   try {
-    const id = req.body.poster._id || req.params.posterId; // we know this _id is of poster id attached to form data, later we parse it and access by poster._id
+    const id = req?.body?.poster?._id || req?.params?.posterId; // we know this _id is of poster id attached to form data, later we parse it and access by poster._id
     if (!id) {
       deleteUplaodedFiles(req);
 
-      return res.status(400).json({
+      return res.status(200).json({
         success: false,
         message: "poster id must be provided!",
       });
     }
 
     const poster = await findPosterById(id);
-    if (poster && (poster.user as string).toString() != req.context.user._id) {
+    if (poster && (poster?.user ?? '')+'' != req.context.user._id) {
       deleteUplaodedFiles(req);
 
-      return res.status(400).json({
+      return res.status(200).json({
         success: false,
         message: "Unauthorized access of the poster denied!",
       });
@@ -36,7 +36,7 @@ export const isUserAuthorized = async (
 
     return res.status(500).json({
       success: false,
-      message: "Internal Server Error!",
+      message: "Internal Server Error1!",
     });
   }
 };

@@ -7,7 +7,7 @@ export const findAllExchanges = async () => {
 };
 
 export const findExchangesByUser = async (user: string) => {
-  return await Exchange.find({ user: user }).select({ user: 0 });
+  return await Exchange.find({ user: user }).select({ user: 0 }).sort({createdAt: -1});
 };
 
 export const updateExchangeStatusById = async (

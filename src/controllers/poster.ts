@@ -30,13 +30,13 @@ export const postImages = (req: Request, res: Response, next: NextFunction) => {
 };
 
 export const postPoster = (req: Request, res: Response, next: NextFunction) => {
-  return createPoster(req.context.user, req.body.poster, res);
+  return createPoster(req.context.user, req.body, res);
 };
 
 export const putPoster = (req: Request, res: Response, next: NextFunction) => {
-  return updatePoster(req.body.poster, res);
+  return updatePoster(req.params.posterId, req.body, res);
 };
 
 export const deletePoster = (req: Request, res: Response, next: NextFunction) => {
-  return removePoster(req.params.posterId, res);
+  return removePoster(req.context.user, req.params.posterId, res);
 };
