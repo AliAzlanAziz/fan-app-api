@@ -9,6 +9,7 @@ import { MongooseGroup } from "../models/mongooseGroup.model";
 import { UserModel } from "../models/user.model";
 import {
   findAllExchanges,
+  findExchangesById,
   findExchangesByUser,
   findUserApprovedHearts,
   findUserHeartsSumGroupByStatus,
@@ -90,6 +91,22 @@ export const allExchanges = async (res: Response) => {
     });
   }
 };
+
+export const adminExchangeDetail = async (exchangeId: string, res: Response) => {
+  try {
+    const exchange = await findExchangesById(exchangeId);
+
+    return res.status(200).json({
+      success: true,
+      exchange: exchange,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "Internal server error!",
+    });
+  }
+};  
 
 export const userAllExchanges = async (user: UserModel, res: Response) => {
   try {

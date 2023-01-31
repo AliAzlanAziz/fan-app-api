@@ -26,11 +26,11 @@ export const postSignin = (req: Request, res: Response, next: NextFunction) => {
 };
 
 export const postAdminSignup = (req: Request, res: Response, next: NextFunction) => {
-  return adminSignUp(req.body.user, res);
+  return adminSignUp(req.body, res);
 };
 
 export const postAdminSignin = (req: Request, res: Response, next: NextFunction) => {
-  return adminSignIn(req.body.user, res);
+  return adminSignIn(req.body, res);
 };
 
 export const getUserProfile = (req: Request, res: Response, next: NextFunction) => {

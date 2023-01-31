@@ -138,21 +138,21 @@ export const adminSignUp = async (user: UserSignupModel, res: Response) => {
   try {
     const userExist = await findUserByEmailAndRole(user.email, UserRoles.ADMIN);
     if (userExist) {
-      return res.status(400).json({
+      return res.status(200).json({
         success: false,
         message: "An account already exists with entered email",
       });
     }
 
     if (!user.password || !user.confirmPassword) {
-      return res.status(400).json({
+      return res.status(200).json({
         success: false,
         message: "Must provide password and confirmPassword",
       });
     }
 
     if (user.password != user.confirmPassword) {
-      return res.status(400).json({
+      return res.status(200).json({
         success: false,
         message: "Password does not match with confirm password!",
       });
@@ -190,9 +190,9 @@ export const adminSignIn = async (user: UserSigninModel, res: Response) => {
   try {
     const result = await findUserByEmailAndRole(user.email, UserRoles.ADMIN);
     if (!result) {
-      return res.status(404).json({
+      return res.status(200).json({
         success: false,
-        message: "User does not exist!",
+        message: "Incorrect email or password",
       });
     }
 
@@ -212,11 +212,12 @@ export const adminSignIn = async (user: UserSigninModel, res: Response) => {
         success: true,
         message: "Successfully signed in!",
         token: token,
+        user: result,
       });
     } else {
-      return res.status(400).json({
+      return res.status(200).json({
         success: false,
-        message: "Incorrect Credentials!",
+        message: "Incorrect email or password",
       });
     }
   } catch (error) {

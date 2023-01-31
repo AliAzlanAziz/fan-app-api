@@ -2,12 +2,15 @@ import { ExchangeStatus } from "../enum/exchangeStatus.enum";
 import Exchange from "../schema/exchange";
 
 export const findAllExchanges = async () => {
-  return await Exchange.find()
-                        .populate('user', '_id name artist imageUrl');
+  return await Exchange.find().populate('user', '_id name artist imageUrl email').sort({createdAt: -1});;
 };
 
 export const findExchangesByUser = async (user: string) => {
   return await Exchange.find({ user: user }).select({ user: 0 }).sort({createdAt: -1});
+};
+
+export const findExchangesById = async (id: string) => {
+  return await Exchange.findById(id).populate('user', '_id name artist imageUrl email').sort({createdAt: -1});
 };
 
 export const updateExchangeStatusById = async (

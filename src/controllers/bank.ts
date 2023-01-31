@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import { parseBankUpdateDataFromRequestBody } from "../helpers/formDataParser";
-import { allBanks, bankInformation, updateBankInformation, updateBankStatusToApproved, updateBankStatusToRejected } from "../services/bank";
+import { allBanks, bankInformation, bankInformationAdmin, updateBankInformation, updateBankStatusToApproved, updateBankStatusToRejected } from "../services/bank";
 
 export const checkReachable = (
   req: Request,
@@ -24,6 +24,10 @@ export const getAllBanks = (
   next: NextFunction
 ) => {
   return allBanks(res);
+};
+
+export const getBanksInfoAdmin = (req: Request, res: Response, next: NextFunction) => {
+  return bankInformationAdmin(req.params.userId, res);
 };
 
 export const putBankStatusToApproved = (

@@ -1,5 +1,5 @@
 import express, { Router } from "express";
-import { checkReachable, getAllExchanges, getUserAllExchanges, postCreateExchange, putExchangeStatusToApproved, putExchangeStatusToRejected } from "../controllers/exchange";
+import { checkReachable, getAllExchanges, getExchangeInfoAdmin, getUserAllExchanges, postCreateExchange, putExchangeStatusToApproved, putExchangeStatusToRejected } from "../controllers/exchange";
 import { isAdminAuthenticated } from "../middlewares/isAdminAuthenticated";
 import { isUserAuthenticated } from "../middlewares/isUserAuthenticated";
 
@@ -12,11 +12,10 @@ router.post("/", isUserAuthenticated, postCreateExchange);
 router.get("/all", isUserAuthenticated, getUserAllExchanges);
 
 router.get("/admin/all", isAdminAuthenticated, getAllExchanges);
+router.get("/admin/:exchangeId", isAdminAuthenticated, getExchangeInfoAdmin);
 
-//router.put("/admin/:exchangeId/accept", isAdminAuthenticated, putExchangeStatusToApproved);
-router.put("/admin/:exchangeId/accept", isUserAuthenticated, putExchangeStatusToApproved);
+router.put("/admin/:exchangeId/accept", isAdminAuthenticated, putExchangeStatusToApproved);
 
-//router.put("/admin/:exchangeId/reject", isAdminAuthenticated, putExchangeStatusToRejected);
-router.put("/admin/:exchangeId/reject", isUserAuthenticated, putExchangeStatusToRejected);
+router.put("/admin/:exchangeId/reject", isAdminAuthenticated, putExchangeStatusToRejected);
 
 export default router;

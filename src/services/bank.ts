@@ -3,12 +3,28 @@ import { Types } from "mongoose";
 import { BankStatus } from "../enum/bankStatus.enum";
 import { BankModel } from "../models/bank.model";
 import { UserModel } from "../models/user.model";
-import { findAllBanks, findBankByUserId, updateBankById, updateBankStatusById } from "../repo/bank";
+import { findAllBanks, findBankByUserId, findBankByUserIdAdmin, updateBankById, updateBankStatusById } from "../repo/bank";
 import Bank from "../schema/bank";
 
 export const bankInformation = async (user: UserModel, res: Response) => {
   try {
     const bank = await findBankByUserId(user._id);
+
+    return res.status(200).json({
+      success: true,
+      bank: bank,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "Internal server error",
+    });
+  }
+};
+
+export const bankInformationAdmin = async (user: string, res: Response) => {
+  try {
+    const bank = await findBankByUserIdAdmin(user);
 
     return res.status(200).json({
       success: true,

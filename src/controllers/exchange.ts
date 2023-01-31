@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { allExchanges, createExchange, updateExchangeStatusToApproved, updateExchangeStatusToRejected, userAllExchanges } from "../services/exchange";
+import { adminExchangeDetail, allExchanges, createExchange, updateExchangeStatusToApproved, updateExchangeStatusToRejected, userAllExchanges } from "../services/exchange";
 
 export const checkReachable = (
   req: Request,
@@ -23,6 +23,14 @@ export const getAllExchanges = (
   next: NextFunction
 ) => {
   return allExchanges(res);
+};
+
+export const getExchangeInfoAdmin = (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  return adminExchangeDetail(req.params.exchangeId, res);
 };
 
 export const getUserAllExchanges = (
