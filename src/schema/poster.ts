@@ -25,6 +25,9 @@ const posterSchema = new Schema({
   fanNotes: { 
     type: String 
   },
+  ticketLink: { 
+    type: String 
+  },
   imagesUrls: [
     {
       type: String,

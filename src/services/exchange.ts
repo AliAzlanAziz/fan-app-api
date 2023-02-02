@@ -76,6 +76,31 @@ export const createExchange = async (
   }
 };
 
+export const exchangeDetail = async (exchangeId: string, user: UserModel, res: Response) => {
+  try {
+    const exchange1 = await Exchange.findById(exchangeId)
+    console.log('exchange1', exchange1, exchange1?.user, user?._id, exchange1?.user == user?._id, exchange1?.user.toString(), user?._id.toString(), exchange1?.user.toString() == user?._id.toString())
+    if (exchange1?.user.toString() != user?._id.toString())
+    {
+      return res.status(404).json({
+        success: false,
+        message: 'Unauthorized',
+      })
+    }
+
+    const exchange = await findExchangesById(exchangeId);
+    return res.status(200).json({
+      success: true,
+      exchange: exchange,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "Internal server error!",
+    });
+  }
+};  
+
 export const allExchanges = async (res: Response) => {
   try {
     const exchanges = await findAllExchanges();

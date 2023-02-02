@@ -104,17 +104,6 @@ export const createPoster = async (
       })
     }
 
-    console.log({
-      _id: new Types.ObjectId(),
-      title: poster.title,
-      date: poster.date,
-      description: poster.description,
-      fanNotes: poster.fanNotes,
-      location: poster.location,
-      imagesUrls: poster.imagesUrls,
-      user: user._id,
-    })
-
     const newPoster = new Poster({
       _id: new Types.ObjectId(),
       title: poster.title,
@@ -122,6 +111,7 @@ export const createPoster = async (
       description: poster.description,
       fanNotes: poster.fanNotes,
       location: poster.location,
+      ticketLink: poster.ticketLink,
       imagesUrls: poster.imagesUrls,
       user: user._id,
     });

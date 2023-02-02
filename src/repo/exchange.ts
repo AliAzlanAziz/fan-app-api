@@ -10,7 +10,7 @@ export const findExchangesByUser = async (user: string) => {
 };
 
 export const findExchangesById = async (id: string) => {
-  return await Exchange.findById(id).populate('user', '_id name artist imageUrl email').sort({createdAt: -1});
+  return await Exchange.findById(id).populate('user', '_id name artist imageUrl email');
 };
 
 export const updateExchangeStatusById = async (

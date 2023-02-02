@@ -1,5 +1,5 @@
 import express, { Router } from "express";
-import { checkReachable, getAllExchanges, getExchangeInfoAdmin, getUserAllExchanges, postCreateExchange, putExchangeStatusToApproved, putExchangeStatusToRejected } from "../controllers/exchange";
+import { checkReachable, getAllExchanges, getExchangeInfo, getExchangeInfoAdmin, getUserAllExchanges, postCreateExchange, putExchangeStatusToApproved, putExchangeStatusToRejected } from "../controllers/exchange";
 import { isAdminAuthenticated } from "../middlewares/isAdminAuthenticated";
 import { isUserAuthenticated } from "../middlewares/isUserAuthenticated";
 
@@ -10,6 +10,7 @@ router.get("/", checkReachable);
 router.post("/", isUserAuthenticated, postCreateExchange);
 
 router.get("/all", isUserAuthenticated, getUserAllExchanges);
+router.get("/details/:exchangeId", isUserAuthenticated, getExchangeInfo);
 
 router.get("/admin/all", isAdminAuthenticated, getAllExchanges);
 router.get("/admin/:exchangeId", isAdminAuthenticated, getExchangeInfoAdmin);

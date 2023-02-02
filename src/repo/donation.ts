@@ -5,7 +5,7 @@ export const findDonationsByArtist = async (artist: string) => {
     .populate("user", "_id name imageUrl")
     .populate(
       "poster",
-      "_id title date location description fanNotes imagesUrls"
+      "_id title date location description fanNotes ticketLink imagesUrls"
     )
     .sort({createdAt: -1});
 };
@@ -15,7 +15,7 @@ export const findDonationsByUser = async (user: string) => {
     .populate("artist", "_id name imageUrl artist")
     .populate(
       "poster",
-      "_id title date location description fanNotes imagesUrls"
+      "_id title date location description fanNotes ticketLink imagesUrls"
     )
     .select({ user: 0 })
     .sort({createdAt: -1});
